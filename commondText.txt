@@ -17,3 +17,30 @@ $git status:查看仓库当前的状态，还未提交的修改
 $git diff xxx:查看具体修改了什么内容
 使用下述命令提交修改
 $git commit -m "add distributed"
+
+版本回退：
+$ git log
+显示从最近到最远的提交日志，若想单行显示历史信息，则：
+$ git log --pretty=oneline
+回退到上一个版本：
+$ git reset --hard HEAD
+在git中HEAD表示当前版本，上个版本就是HEAD^，上上个版本就是HEAD^^,往前100个版本写为HEAD=100
+想撤回到新版本则需查看版本号：
+$ git reset --hard ....(版本号，不用写全)
+或者不记得版本号：
+$ git reflog:记录每一次指令
+
+撤销修改：
+$ git checkout --xxx
+把xxx文件在工作区的修改全部撤销分两种情况：（总之就是让文件回到最近一次的git commit或git add时的状态）
+1.xxx自修改后还没有被放到暂存区，现在撤销修改就回到和上个版本库一摸一样的状态；
+2.xxx自修改后已经添加到暂存区，又做了修改，现在撤销修改就回到添加到暂存区后的状态。
+ 
+删除文件：
+通常直接在文件管理其中把文件删除，或使用rm命令
+$ rm xxx
+此时git status工作区与版本库就不一致了有两种选择：
+1.确实从版本库中删除：
+$ git rm xxx 
+2.删错了，撤回：
+$ git checkout -- xxx 
